@@ -7,19 +7,17 @@ remoteVideo.style.opacity = 0
 localVideo.onplaying = () => { localVideo.style.opacity = 1 }
 remoteVideo.onplaying = () => { remoteVideo.style.opacity = 1 }
 
+
 let peer
 function init(userId) {
-    peer = new Peer(userId, {
-        host:'opentalkvoice.herokuapp.com', secure:true, port:443
- /*       host:'opentalkapp.herokuapp.com', secure:true, port:443
-        host:'peerjs-server.herokuapp.com', secure:true, port:443
-*/
-    })
-    peer.on('open', () => {
-        Android.onPeerConnected()
-    })
+     peer = new Peer(userId, {
+           host:'opentalkvoice.herokuapp.com', secure:true, port:443
+       })
+       peer.on('open', () => {
+           Android.onPeerConnected()
+       })
 
-    listen()
+       listen()
 }
 
 let localStream
@@ -28,7 +26,7 @@ function listen() {
 
         navigator.getUserMedia({
             audio: true,
-            video: false
+            video: true
         }, (stream) => {
             localVideo.srcObject = stream
             localStream = stream
@@ -50,7 +48,7 @@ function listen() {
 function startCall(otherUserId) {
     navigator.getUserMedia({
         audio: true,
-        video: false
+        video: true
     }, (stream) => {
 
         localVideo.srcObject = stream
