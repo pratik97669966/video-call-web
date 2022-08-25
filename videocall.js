@@ -11,7 +11,7 @@ remoteVideo.onplaying = () => { remoteVideo.style.opacity = 1 }
 let peer
 function init(userId) {
      peer = new Peer(userId, {
-           host:'opentalkvoice.herokuapp.com', secure:true, port:443
+            host:'peerjs-server.herokuapp.com', secure:true, port:443
        })
        peer.on('open', () => {
            Android.onPeerConnected()
