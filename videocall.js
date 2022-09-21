@@ -12,8 +12,8 @@ let peer
 function init(userId) {
      peer = new Peer(userId, {
          
-         host:'opentalkapp.herokuapp.com', secure:true, port:443
-        // host:'peerjs-server.herokuapp.com', secure:true, port:443
+        // host:'opentalkapp.herokuapp.com', secure:true, port:443
+         host:'peerjs-server.herokuapp.com', secure:true, port:443
        })
        peer.on('open', () => {
            Android.onPeerConnected()
