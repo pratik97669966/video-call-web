@@ -1,47 +1,3 @@
-
-let localStream;
-let currentCamera = 0;
-let videoDevices = [];
-
-navigator.mediaDevices.enumerateDevices().then(devices => {
-    videoDevices = devices.filter(device => device.kind === 'videoinput');
-});
-
-async function startStream() {
-    const constraints = {
-        video: { deviceId: videoDevices[currentCamera]?.deviceId || undefined },
-        audio: true
-    };
-
-    localStream = await navigator.mediaDevices.getUserMedia(constraints);
-    const video = document.querySelector('video');
-    video.srcObject = localStream;
-    video.play();
-}
-
-document.getElementById("flip-camera").onclick = async () => {
-    currentCamera = (currentCamera + 1) % videoDevices.length;
-    if (localStream) localStream.getTracks().forEach(track => track.stop());
-    await startStream();
-};
-
-// Toggle Camera
-document.getElementById("toggle-camera").onclick = () => {
-    const btn = document.getElementById("toggle-camera");
-    const videoTrack = localStream.getVideoTracks()[0];
-    videoTrack.enabled = !videoTrack.enabled;
-    btn.textContent = videoTrack.enabled ? "📷" : "🚫";
-};
-
-// Toggle Blur
-document.getElementById("toggle-blur").onclick = () => {
-    const btn = document.getElementById("toggle-blur");
-    const video = document.querySelector("video");
-    const isBlurred = video.classList.toggle("blurred");
-    btn.textContent = isBlurred ? "❌" : "🌀";
-};
-
-
 let localVideo = document.getElementById("local-video")
 let remoteVideo = document.getElementById("remote-video")
 
@@ -71,9 +27,10 @@ function init(userId) {
         Android.onPeerConnected()
     })
 
-    listen()
+    listen();
 }
 
+let localStream
 function listen() {
     peer.on('call', (call) => {
 
@@ -138,5 +95,4 @@ function toggleAudio(b) {
     } else {
         localStream.getAudioTracks()[0].enabled = false
     }
-}
-
+} 
