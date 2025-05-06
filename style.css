@@ -17,3 +17,31 @@ html, body {
     margin: 5px;
     border-radius: 10px;
 }
+
+
+.controls {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.controls button {
+    font-size: 1.2em;
+    margin: 0 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    cursor: pointer;
+}
+
+video {
+    filter: none;
+    transition: filter 0.3s ease-in-out;
+}
+
+video.blurred {
+    filter: blur(8px);
+}
